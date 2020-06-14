@@ -1,12 +1,18 @@
 package ru.volnenko.se.repository;
 
+import org.springframework.stereotype.Repository;
 import ru.volnenko.se.entity.Task;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.LinkedHashMap;
+import java.util.List;
+import java.util.Map;
 
 /**
  * @author Denis Volnenko
  */
+@Repository
 public final class TaskRepository implements ru.volnenko.se.api.repository.ITaskRepository {
 
     private final Map<String, Task> map = new LinkedHashMap<>();

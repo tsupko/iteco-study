@@ -24,9 +24,20 @@
             <email>denis@volnenko.ru</email>
             <url>http://www.volnenko.ru</url>
         </developer>
+        <developer>
+            <id>tsupko</id>
+            <name>Alexander Tsupko</name>
+            <email>tsupko.alexander@yandex.ru</email>
+        </developer>
     </developers>
 
     <dependencies>
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-context</artifactId>
+            <version>5.2.6.RELEASE</version>
+            <scope>compile</scope>
+        </dependency>
         <dependency>
             <groupId>com.fasterxml.jackson.core</groupId>
             <artifactId>jackson-databind</artifactId>
