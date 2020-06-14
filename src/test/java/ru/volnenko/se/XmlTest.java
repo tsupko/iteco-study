@@ -7,8 +7,6 @@ import org.junit.Test;
 import ru.volnenko.se.entity.Project;
 
 import java.io.IOException;
-import java.util.Arrays;
-import java.util.List;
 
 /**
  * @author Denis Volnenko

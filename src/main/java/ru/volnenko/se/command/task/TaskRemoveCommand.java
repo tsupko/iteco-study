@@ -1,14 +1,20 @@
 package ru.volnenko.se.command.task;
 
+import org.springframework.context.event.EventListener;
 import org.springframework.stereotype.Component;
 import ru.volnenko.se.command.AbstractCommand;
 import ru.volnenko.se.controller.InputScan;
+import ru.volnenko.se.event.CommandEvent;
+
+import java.util.logging.Logger;
 
 /**
  * @author Denis Volnenko
  */
 @Component
-public final class TaskRemoveCommand extends AbstractCommand {
+public final class TaskRemoveCommand implements AbstractCommand {
+
+    private static final Logger logger = Logger.getLogger("TaskRemoveCommand");
 
     private final InputScan inputScan;
 
@@ -27,16 +33,16 @@ public final class TaskRemoveCommand extends AbstractCommand {
     }
 
     @Override
-    public void execute() {
-        System.out.println("[REMOVING TASK]");
-        System.out.println("Enter task order index:");
+    @EventListener(condition = "#event.name eq 'task-remove'")
+    public void execute(CommandEvent event) {
+        logger.info("[REMOVING TASK]");
+        logger.info("Enter task order index:");
         final Integer orderIndex = inputScan.nextInteger();
         if (orderIndex == null) {
-            System.out.println("Error! Incorrect order index...");
-            System.out.println();
+            logger.warning("Error! Incorrect order index...\n");
             return;
         }
-        System.out.println("[OK]");
+        logger.info("[OK]");
     }
 
 }

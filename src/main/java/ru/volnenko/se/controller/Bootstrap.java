@@ -1,11 +1,10 @@
 package ru.volnenko.se.controller;
 
+import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.stereotype.Component;
-import ru.volnenko.se.command.AbstractCommand;
+import ru.volnenko.se.event.CommandEvent;
 
-import java.util.LinkedHashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.logging.Logger;
 
 /**
  * @author Denis Volnenko
@@ -13,18 +12,18 @@ import java.util.Map;
 @Component
 public final class Bootstrap {
 
-    private final Map<String, AbstractCommand> commands = new LinkedHashMap<>();
-    private InputScan scanner;
+    private static final Logger logger = Logger.getLogger("Bootstrap");
 
-    public Bootstrap(List<? extends AbstractCommand> commands, InputScan scanner) {
-        for (AbstractCommand command : commands) {
-            this.commands.put(command.command(), command);
-        }
+    private final InputScan scanner;
+    private final ApplicationEventPublisher publisher;
+
+    public Bootstrap(InputScan scanner, ApplicationEventPublisher publisher) {
         this.scanner = scanner;
+        this.publisher = publisher;
     }
 
-    public void start() throws Exception {
-        System.out.println("*** WELCOME TO TASK MANAGER ***");
+    public void start() {
+        logger.info("*** WELCOME TO TASK MANAGER ***");
         String command = "";
         while (!"exit".equals(command)) {
             command = scanner.nextLine();
@@ -32,11 +31,9 @@ public final class Bootstrap {
         }
     }
 
-    private void execute(final String command) throws Exception {
-        if (command == null || command.isEmpty()) return;
-        final AbstractCommand abstractCommand = commands.get(command);
-        if (abstractCommand == null) return;
-        abstractCommand.execute();
+    private void execute(final String command) {
+        final CommandEvent commandEvent = new CommandEvent(command);
+        publisher.publishEvent(commandEvent);
     }
 
 }

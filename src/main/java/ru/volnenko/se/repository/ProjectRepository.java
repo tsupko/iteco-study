@@ -1,6 +1,7 @@
 package ru.volnenko.se.repository;
 
 import org.springframework.stereotype.Repository;
+import ru.volnenko.se.api.repository.IProjectRepository;
 import ru.volnenko.se.entity.Project;
 
 import java.util.ArrayList;
@@ -13,7 +14,7 @@ import java.util.Map;
  * @author Denis Volnenko
  */
 @Repository
-public final class ProjectRepository implements ru.volnenko.se.api.repository.IProjectRepository {
+public final class ProjectRepository implements IProjectRepository {
 
     private final Map<String, Project> map = new LinkedHashMap<>();
 

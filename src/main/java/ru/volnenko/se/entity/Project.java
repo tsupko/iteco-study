@@ -1,11 +1,11 @@
 package ru.volnenko.se.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.fasterxml.jackson.annotation.JsonProperty;
 
 import java.io.Serializable;
 import java.util.Date;
 import java.util.UUID;
+import java.util.logging.Logger;
 
 /**
  * @author Denis Volnenko
@@ -14,22 +14,18 @@ import java.util.UUID;
 @JsonIgnoreProperties(ignoreUnknown = true)
 public final class Project implements Serializable {
 
-//    public static final long serialVersionUID = 1;
+    private static final Logger logger = Logger.getLogger("Project");
 
     private String id = UUID.randomUUID().toString();
 
     private String name = "";
 
-    private Date dateBegin;
-
     private Date dateEnd;
 
     private Date created = new Date();
 
-//    private transient Integer test = 123;
-
     public void test() {
-        System.out.println("HELLO");
+        logger.info("HELLO");
     }
 
     public Date getCreated() {
@@ -54,14 +50,6 @@ public final class Project implements Serializable {
 
     public void setName(String name) {
         this.name = name;
-    }
-
-    public Date getDateBegin() {
-        return dateBegin;
-    }
-
-    public void setDateBegin(Date dateBegin) {
-        this.dateBegin = dateBegin;
     }
 
     public Date getDateEnd() {

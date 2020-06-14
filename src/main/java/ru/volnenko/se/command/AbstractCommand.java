@@ -1,14 +1,18 @@
 package ru.volnenko.se.command;
 
+import ru.volnenko.se.event.CommandEvent;
+
+import java.io.IOException;
+
 /**
  * @author Denis Volnenko
  */
-public abstract class AbstractCommand {
+public interface AbstractCommand {
 
-    public abstract void execute() throws Exception;
+    void execute(CommandEvent event) throws IOException, ClassNotFoundException;
 
-    public abstract String command();
+    String command();
 
-    public abstract String description();
+    String description();
 
 }

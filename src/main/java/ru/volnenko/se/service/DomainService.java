@@ -1,6 +1,5 @@
 package ru.volnenko.se.service;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import ru.volnenko.se.api.service.IDomainService;
 import ru.volnenko.se.api.service.IProjectService;
@@ -13,11 +12,13 @@ import ru.volnenko.se.entity.Domain;
 @Service
 public final class DomainService implements IDomainService {
 
-    @Autowired
-    IProjectService projectService;
+    private final IProjectService projectService;
+    private final ITaskService taskService;
 
-    @Autowired
-    ITaskService taskService;
+    public DomainService(IProjectService projectService, ITaskService taskService) {
+        this.projectService = projectService;
+        this.taskService = taskService;
+    }
 
     @Override
     public void load(final Domain domain) {

@@ -1,13 +1,15 @@
 package ru.volnenko.se.command.project;
 
+import org.springframework.context.event.EventListener;
 import org.springframework.stereotype.Component;
 import ru.volnenko.se.command.AbstractCommand;
+import ru.volnenko.se.event.CommandEvent;
 
 /**
  * @author Denis Volnenko
  */
 @Component
-public final class ProjectRemoveCommand extends AbstractCommand {
+public final class ProjectRemoveCommand implements AbstractCommand {
 
     @Override
     public String command() {
@@ -20,8 +22,9 @@ public final class ProjectRemoveCommand extends AbstractCommand {
     }
 
     @Override
-    public void execute() {
-
+    @EventListener(condition = "#event.name eq 'project-remove'")
+    public void execute(CommandEvent event) {
+        throw new UnsupportedOperationException();
     }
 
 }

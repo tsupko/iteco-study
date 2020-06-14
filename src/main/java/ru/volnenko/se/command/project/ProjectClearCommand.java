@@ -1,14 +1,20 @@
 package ru.volnenko.se.command.project;
 
+import org.springframework.context.event.EventListener;
 import org.springframework.stereotype.Component;
 import ru.volnenko.se.api.repository.IProjectRepository;
 import ru.volnenko.se.command.AbstractCommand;
+import ru.volnenko.se.event.CommandEvent;
+
+import java.util.logging.Logger;
 
 /**
  * @author Denis Volnenko
  */
 @Component
-public final class ProjectClearCommand extends AbstractCommand {
+public final class ProjectClearCommand implements AbstractCommand {
+
+    private static final Logger logger = Logger.getLogger("ProjectClearCommand");
 
     private final IProjectRepository projectRepository;
 
@@ -27,9 +33,10 @@ public final class ProjectClearCommand extends AbstractCommand {
     }
 
     @Override
-    public void execute() {
+    @EventListener(condition = "#event.name eq 'project-clear'")
+    public void execute(CommandEvent event) {
         projectRepository.clear();
-        System.out.println("[ALL PROJECTS REMOVED]");
+        logger.info("[ALL PROJECTS REMOVED]");
     }
 
 }

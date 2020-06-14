@@ -17,13 +17,9 @@ import java.util.List;
 public final class TaskService implements ITaskService {
 
     private final ITaskRepository taskRepository;
-
     private final IProjectRepository projectRepository;
 
-    public TaskService(
-            final ITaskRepository taskRepository,
-            final IProjectRepository projectRepository
-    ) {
+    public TaskService(ITaskRepository taskRepository, IProjectRepository projectRepository) {
         this.taskRepository = taskRepository;
         this.projectRepository = projectRepository;
     }
